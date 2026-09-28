@@ -31,13 +31,13 @@ $$0.00 \le R_i \le 1.00$$
 In code, use a common clamp function:
 
 $$
-\operatorname{clamp}(x,0,1)=\min(1,\max(0,x))
+\text{clamp}(x,0,1)=\min(1,\max(0,x))
 $$
 
 ### $R_1$: Adjusted Speed
 
 $$
-R_1 = \operatorname{clamp}\left(
+R_1 = \text{clamp}\left(
 \frac{D}{T_{\text{norm}} \cdot V_{\text{limit}}}
 \left[
 \delta_{Y_c,Y_t} + (1-\delta_{Y_c,Y_t})
@@ -48,7 +48,7 @@ $$
 ### $R_2$: Burst Acceleration
 
 $$
-R_2 = \operatorname{clamp}\left(
+R_2 = \text{clamp}\left(
 \frac{a_{\text{burst}}}{a_{\text{ref}}}
 \left[
 1-\gamma_{\text{drag}}
@@ -59,7 +59,7 @@ $$
 ### $R_3$: Base Stamina — Quadratic Pace Tax
 
 $$
-R_3 = \operatorname{clamp}\left(
+R_3 = \text{clamp}\left(
 1-\frac{\max\left(0,E_{\text{consumed}}(D)-E_{\text{glycogen}}\right)}{E_{\text{capacity}}},0,1\right)
 $$
 
@@ -76,14 +76,14 @@ $$
 ### $R_4$: Guts / Resilience
 
 $$
-R_4 = \operatorname{clamp}\left(
+R_4 = \text{clamp}\left(
 \bar{S}_{\text{duel}}\sqrt{F_{\text{duel}}},0,1\right)
 $$
 
 ### $R_5$: Conditioning
 
 $$
-R_5 = \operatorname{clamp}\left(
+R_5 = \text{clamp}\left(
 \frac{CR_3}{1+\alpha\sigma_{\text{rank}}}
 \exp\left[-\beta\max\left(0,\overline{|\Delta WB|}-6\right)\right],0,1\right)
 $$
@@ -91,7 +91,7 @@ $$
 ### $R_6$: Race IQ and Positioning
 
 $$
-R_6 = \operatorname{clamp}\left(
+R_6 = \text{clamp}\left(
  w_{\text{pos}}\left[1-\lambda\frac{\sum\max(0,C_{k+1}-C_k)}{M}\right]
  +w_{\text{tact}}V_{\text{tactical}},0,1\right)
 $$
@@ -99,7 +99,7 @@ $$
 ### $R_7$: Track Adaptability
 
 $$
-R_7 = \operatorname{clamp}\left(
+R_7 = \text{clamp}\left(
 \min\left(1,\frac{\bar V_{\text{heavy}}}{\bar V_{\text{firm}}}\right)
 \left[1-\alpha_{\text{water}}M_{\text{water}}\right],0,1\right)
 $$
@@ -117,14 +117,14 @@ This Gaussian form naturally produces $0 < R_8 \le 1$ when $\sigma_D>0$.
 ### $R_9$: Weight Tolerance
 
 $$
-R_9 = \operatorname{clamp}\left(
+R_9 = \text{clamp}\left(
 1-\eta_{\text{wt}}\left(\frac{W_{\text{carried}}}{WB}-\theta_{\text{base}}\right),0,1\right)
 $$
 
 ### $R_{10}$: Clutch / Synergy
 
 $$
-R_{10} = \operatorname{clamp}\left(
+R_{10} = \text{clamp}\left(
  w_{G1}S_{G1}
  +w_{\text{jock}}\frac{CR_{3\_\text{pair}}}{CR_{3\_\text{base}}},0,1\right)
 $$
@@ -196,7 +196,7 @@ $$
 
 $$
 \Omega_{\text{traffic}}
-=\operatorname{clamp}(1-\delta_{\text{block}}T_{\text{blocked}},0,1)
+=\text{clamp}(1-\delta_{\text{block}}T_{\text{blocked}},0,1)
 $$
 
 ### Soil Resistance — Bifurcated Model
@@ -204,9 +204,9 @@ $$
 $$
 \Omega_{\text{soil}}=
 \begin{cases}
-\operatorname{clamp}\left(
+\text{clamp}\left(
 1-\kappa_{\text{turf}}\max(0,P_{\text{depth}}-P_{\text{base}})(1-R_7),0,1\right), & \text{TURF}\\
-\operatorname{clamp}(\Omega_{\text{cushion}}\Omega_{\text{kickback}},0,1), & \text{DIRT}
+\text{clamp}(\Omega_{\text{cushion}}\Omega_{\text{kickback}},0,1), & \text{DIRT}
 \end{cases}
 $$
 
@@ -214,12 +214,12 @@ For dirt:
 
 $$
 \Omega_{\text{cushion}}
-=\operatorname{clamp}\left(1-\kappa_{\text{dirt}}d_{\text{cushion}}(1-R_7),0,1\right)
+=\text{clamp}\left(1-\kappa_{\text{dirt}}d_{\text{cushion}}(1-R_7),0,1\right)
 $$
 
 $$
 \Omega_{\text{kickback}}
-=\operatorname{clamp}\left(
+=\text{clamp}\left(
 1-\lambda_{\text{kb}}
 \left(\frac{\text{Position}-1}{N_{\text{total}}-1}\right)
 (1-M_{\text{water}}),0,1\right)
@@ -231,7 +231,7 @@ A front-running position of 1 gives $\Omega_{\text{kickback}}=1$ before clamping
 
 $$
 \Omega_{\text{corner}}
-=\operatorname{clamp}\left(
+=\text{clamp}\left(
 1-\gamma_{\text{corner}}\frac{V_{\text{entry}}^2}{r_{\text{turn}}}
 -\eta_{\text{wide}}\Delta D_{\text{wide}},0,1\right)
 $$
@@ -242,7 +242,7 @@ Because the raw pace-bias expression can exceed 1 or become negative, apply the 
 
 $$
 \Omega_{\text{pace}}
-=\operatorname{clamp}\left(
+=\text{clamp}\left(
 1+\mu_{\text{pace}}
 \left(\frac{\text{Pace}_{\text{actual}}-\text{Pace}_{\text{par}}}{\text{Pace}_{\text{par}}}\right)
 \mathbb{I}_{\text{lead}},0,1\right)
