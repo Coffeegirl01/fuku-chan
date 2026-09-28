@@ -67,6 +67,7 @@ web_modules/
 
 # dotenv environment variable files
 .env
+.env.local
 .env.*
 !.env.example
 
@@ -141,3 +142,41 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# ============= Python =============
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# ============= Local outputs (don't commit) =============
+predictions/
+outputs/
+audit_logs/
+*.prediction.json
+*.audit.json
+
+# ============= Sensitive data (don't commit) =============
+secrets/
+private-data/
+raw-private-data/
+*.pem
+*.key
+
+# ============= IDE =============
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
