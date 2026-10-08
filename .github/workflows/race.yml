@@ -26,4 +26,4 @@ jobs:
 
       - name: Run race engine
         run: |
-          python engine/run_race.py
+          python -m engine.run_race
