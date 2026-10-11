@@ -175,7 +175,6 @@ def create_sample_race() -> Race:
         precipitation_mm=1.0,
         soil_moisture=0.15,
         track_rating=0.75,
-        course_bias=0.60,
     )
 
     # Create race
