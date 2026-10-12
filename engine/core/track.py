@@ -1,3 +1,27 @@
+from typing import Dict, Any
+
+
+class Track:
+    def __init__(self, name: str, country: str, surface: str, altitude: int = 0,
+                 specialty_distance: str = "middle", track_layout: str = "oval",
+                 temperature_c: float = 20.0, humidity_pct: float = 50.0,
+                 wind_speed_kph: float = 0.0, precipitation_mm: float = 0.0,
+                 soil_moisture: float = 0.0, track_rating: float = 0.5,
+                 metadata: Dict[str, Any] = None):
+        self.name = name
+        self.country = country
+        self.altitude = altitude
+        self.surface = surface
+        self.specialty_distance = specialty_distance
+        self.track_layout = track_layout
+        self.temperature_c = temperature_c
+        self.humidity_pct = humidity_pct
+        self.wind_speed_kph = wind_speed_kph
+        self.precipitation_mm = precipitation_mm
+        self.soil_moisture = soil_moisture
+        self.track_rating = track_rating
+        self.metadata = metadata or {}
+
     @classmethod
     def from_weather_data(cls, name: str, country: str, surface: str, weather: Dict[str, Any]) -> "Track":
         """Create a Track from weather or Forecast data later."""
